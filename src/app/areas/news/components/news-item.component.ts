@@ -1,19 +1,19 @@
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  effect,
   input,
   output,
-  EventEmitter,
+  signal,
 } from '@angular/core';
+import { formatDistanceToNow } from 'date-fns';
 import { NewsArticle } from '../types';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-news-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe],
+  imports: [],
   template: `
-    <p>{{ headerText() }}</p>
     @let article = articleToDisplay();
 
     <article class="card bg-base-100 shadow-xl mb-4">
@@ -23,10 +23,7 @@ import { DatePipe } from '@angular/common';
         </h2>
         <p>{{ article.shortDescription }}</p>
         <p>
-          <small
-            >{{ article.datePublished | date: 'medium' }}This article was posted
-            2 days ago.</small
-          >
+          <small>This article was posted {{ relativeDate() }}</small>
         </p>
         <div class="card-actions justify-end">
           <a
@@ -46,6 +43,22 @@ export class NewsItemComponent {
   articleToDisplay = input.required<NewsArticle>();
   headerText = input('Default Header');
 
+  relativeDate = signal('...');
   // @Output() linkRead = new EventEmitter<NewsArticle>()
   linkRead = output<NewsArticle>();
+
+  // effects - these are Signal things that you can use to do cool stuff, but be careful
+  constructor() {
+    effect(() => {
+      // something in the background.
+      // effects are "side effects" - not like "special effects"
+      const intervalId = setInterval(() => {
+        this.relativeDate.set(
+          formatDistanceToNow(new Date(this.articleToDisplay().datePublished)) +
+            ' Ago',
+        );
+      }, 1000);
+      return () => clearInterval(intervalId); // optional - code to run when the component is taken out of the dom.
+    });
+  }
 }

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+} from '@angular/core';
 import { NewsArticle } from '../types';
 import { NewsItemComponent } from './news-item.component';
 
@@ -7,6 +12,13 @@ import { NewsItemComponent } from './news-item.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NewsItemComponent],
   template: `
+    @if (readArticleCount() !== 0) {
+      <div>
+        <p>You have read {{ readArticleCount() }} articles!</p>
+      </div>
+    } @else {
+      <p>You are really behind on your reading! Read some stuff.</p>
+    }
     <section>
       @for (article of articles(); track article.id) {
         <!-- display the app-news-item -->
@@ -50,12 +62,14 @@ export class NewsListComponent {
       shortDescription:
         'Youtube Videos about Angular Signals and stuff from Deborah Kurata',
       link: 'https://www.youtube.com/@deborah_kurata/videos',
-      datePublished: '2024-11-10T10:15:12.556Z',
+      datePublished: '2024-12-16T21:20:17.014Z',
       linkSlug: 'Deborah Kurata Videos',
     },
   ]);
 
+  readArticles = signal<NewsArticle[]>([]);
+  readArticleCount = computed(() => this.readArticles().length);
   readTheArticle(article: NewsArticle) {
-    console.log(article);
+    this.readArticles.update((a) => [article, ...a]);
   }
 }

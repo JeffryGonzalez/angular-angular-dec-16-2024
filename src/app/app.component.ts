@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import { NewsComponent } from './areas/news/news.component';
+import { NavbarComponent } from './components/navbar-component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   template: `
-    <section class="container mx-auto">
-      <app-news />
-    </section>
+    <app-nav-bar />
+    <main class="container mx-auto">
+      <router-outlet />
+    </main>
   `,
   styles: [],
-  imports: [NewsComponent], // put this in the bundle of code you send to the browser.
+  imports: [NavbarComponent, RouterOutlet], // put this in the bundle of code you send to the browser.
 })
 export class AppComponent {}
