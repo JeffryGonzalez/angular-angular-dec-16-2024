@@ -1,5 +1,5 @@
-import { DatePipe, NgFor } from '@angular/common';
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
 type NewArticle = {
   id: string;
@@ -42,6 +42,7 @@ export class NewsListComponent {
   // data in a component is a Signal, or .................................. an observable
 
   articles = signal<NewArticle[]>([
+    // none of that change detection stuff I just talked has anything to do with signals.
     {
       id: '1',
       title: 'Lunch time',
