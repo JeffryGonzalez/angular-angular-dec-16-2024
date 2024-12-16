@@ -11,6 +11,7 @@ import { NewsItemComponent } from './news-item.component';
       @for (article of articles(); track article.id) {
         <!-- display the app-news-item -->
         <app-news-item
+          (linkRead)="readTheArticle($event)"
           [articleToDisplay]="article"
           [headerText]="preferredHeader()"
         />
@@ -53,4 +54,8 @@ export class NewsListComponent {
       linkSlug: 'Deborah Kurata Videos',
     },
   ]);
+
+  readTheArticle(article: NewsArticle) {
+    console.log(article);
+  }
 }

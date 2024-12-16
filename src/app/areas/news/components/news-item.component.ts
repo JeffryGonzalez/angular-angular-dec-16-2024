@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  output,
+  EventEmitter,
+} from '@angular/core';
 import { NewsArticle } from '../types';
 import { DatePipe } from '@angular/common';
 
@@ -9,9 +15,12 @@ import { DatePipe } from '@angular/common';
   template: `
     <p>{{ headerText() }}</p>
     @let article = articleToDisplay();
+
     <article class="card bg-base-100 shadow-xl mb-4">
       <div class="card-body">
-        <h2 class="card-title text-primary">{{ article.title }}</h2>
+        <h2 [title]="article.datePublished" class="card-title text-primary">
+          {{ article.title }}
+        </h2>
         <p>{{ article.shortDescription }}</p>
         <p>
           <small
@@ -20,9 +29,13 @@ import { DatePipe } from '@angular/common';
           >
         </p>
         <div class="card-actions justify-end">
-          <a class="btn btn-primary" [href]="article.link" target="_blank">{{
-            article.linkSlug
-          }}</a>
+          <a
+            (click)="linkRead.emit(article)"
+            class="btn btn-primary"
+            [href]="article.link"
+            target="_blank"
+            >{{ article.linkSlug }}</a
+          >
         </div>
       </div>
     </article>
@@ -32,4 +45,7 @@ import { DatePipe } from '@angular/common';
 export class NewsItemComponent {
   articleToDisplay = input.required<NewsArticle>();
   headerText = input('Default Header');
+
+  // @Output() linkRead = new EventEmitter<NewsArticle>()
+  linkRead = output<NewsArticle>();
 }
