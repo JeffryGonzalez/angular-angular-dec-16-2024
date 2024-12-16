@@ -13,7 +13,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
         <p>It is going to rain tomorrow</p>
       </article>
       <article>
-        <p>It Rained Yesterday!</p>
+        <p>The Holidays are coming</p>
       </article>
     </section>
   `,
