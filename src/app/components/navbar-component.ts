@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
   template: `
     <div class="navbar bg-base-100">
       <div class="flex-1">
-        <a class="btn btn-ghost text-xl">Applied Angular</a>
+        <a class="btn btn-ghost text-xl" routerLink="">Applied Angular</a>
       </div>
       <div class="flex-none">
         <ul class="menu menu-horizontal px-1">

@@ -5,7 +5,7 @@ import {
   signal,
 } from '@angular/core';
 import { NewsArticle } from '../types';
-import { NewsItemComponent } from './news-item.component';
+import { NewsItemComponent } from './news-item/news-item.component';
 
 @Component({
   selector: 'app-news-list',
@@ -25,7 +25,6 @@ import { NewsItemComponent } from './news-item.component';
         <app-news-item
           (linkRead)="readTheArticle($event)"
           [articleToDisplay]="article"
-          [headerText]="preferredHeader()"
         />
       } @empty {
         <p>No news! Check Back Later!</p>
