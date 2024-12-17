@@ -27,32 +27,19 @@ export const CounterStore = signalStore(
     return {
       byValues: computed(() => BY_VALUES),
       decrementDisabled: computed(() => store.current() - store.by() < 0),
-      fizzBuzz: computed(() => {
-        const current = store.current();
-        if (current === 0) {
-          return '';
-        }
-        if (isFizzBuzz(current)) {
-          return 'FizzBuzz';
-        }
-        if (isFizz(current)) {
-          return 'Fizz';
-        }
-        if (isBuzz(current)) {
-          return 'Buzz';
-        }
-        return '';
-      }),
+      fizzBuzz: computed(() => fizzBuzzIfy(store.current())),
     };
   }),
 );
 
-function isFizz(n: number) {
-  return n % 3 === 0;
-}
-function isBuzz(n: number) {
-  return n % 5 === 0;
-}
-function isFizzBuzz(n: number) {
-  return isFizz(n) && isBuzz(n);
+function fizzBuzzIfy(val: number): '' | 'Fizz' | 'Buzz' | 'FizzBuzz' {
+  const isFizz = (n: number) => n % 3 === 0;
+  const isBuzz = (n: number) => n % 5 === 0;
+  const isFizzBuzz = (n: number) => isFizz(n) && isBuzz(n);
+
+  if (val === 0) return '';
+  if (isFizzBuzz(val)) return 'FizzBuzz';
+  if (isFizz(val)) return 'Fizz';
+  if (isBuzz(val)) return 'Buzz';
+  return '';
 }
