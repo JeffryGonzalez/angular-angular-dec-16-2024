@@ -8,6 +8,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   template: `
     <div class="flex gap-4">
       <a routerLink="ui">UI</a>
+      <a routerLink="prefs">Prefs</a>
     </div>
     <router-outlet />
   `,
