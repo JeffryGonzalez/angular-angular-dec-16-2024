@@ -6,8 +6,8 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-
-type ByValues = 1 | 3 | 5;
+export const BY_VALUES = [1, 3, 5] as const;
+type ByValues = (typeof BY_VALUES)[number];
 type CounterState = {
   current: number;
   by: ByValues;
@@ -25,6 +25,7 @@ export const CounterStore = signalStore(
   }),
   withComputed((store) => {
     return {
+      byValues: computed(() => BY_VALUES),
       decrementDisabled: computed(() => store.current() - store.by() < 0),
       fizzBuzz: computed(() => {
         const current = store.current();
