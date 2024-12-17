@@ -7,6 +7,13 @@ import { HistoryComponent } from './areas/news/components/history.component';
 // Modes within our application.
 export const routes: Routes = [
   {
+    path: 'counter',
+    loadChildren: () =>
+      import('./areas/counter-lab/counter.routes').then(
+        (r) => r.COUNTER_ROUTES,
+      ),
+  },
+  {
     path: 'golf',
     loadChildren: () =>
       import('./areas/golf/golf.routes').then((r) => r.GOLF_ROUTES),
