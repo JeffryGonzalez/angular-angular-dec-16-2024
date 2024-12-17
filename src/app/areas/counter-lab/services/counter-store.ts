@@ -32,7 +32,7 @@ export const CounterStore = signalStore(
   }),
 );
 
-function fizzBuzzIfy(val: number): '' | 'Fizz' | 'Buzz' | 'FizzBuzz' {
+export function fizzBuzzIfy(val: number): '' | 'Fizz' | 'Buzz' | 'FizzBuzz' {
   const isFizz = (n: number) => n % 3 === 0;
   const isBuzz = (n: number) => n % 5 === 0;
   const isFizzBuzz = (n: number) => isFizz(n) && isBuzz(n);
