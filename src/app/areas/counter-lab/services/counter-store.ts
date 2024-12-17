@@ -32,18 +32,27 @@ export const CounterStore = signalStore(
         if (current === 0) {
           return '';
         }
-        if (current % 3 === 0 && current % 5 === 0) {
+        if (isFizzBuzz(current)) {
           return 'FizzBuzz';
         }
-        if (current % 3 === 0) {
+        if (isFizz(current)) {
           return 'Fizz';
         }
-        if (current % 5 === 0) {
+        if (isBuzz(current)) {
           return 'Buzz';
         }
-
         return '';
       }),
     };
   }),
 );
+
+function isFizz(n: number) {
+  return n % 3 === 0;
+}
+function isBuzz(n: number) {
+  return n % 5 === 0;
+}
+function isFizzBuzz(n: number) {
+  return isFizz(n) && isBuzz(n);
+}
