@@ -9,7 +9,8 @@ import {
   withState,
 } from '@ngrx/signals';
 export const BY_VALUES = [1, 3, 5] as const;
-type ByValues = (typeof BY_VALUES)[number];
+type ByValues = (typeof BY_VALUES)[number]; // createa  type like 1 | 3 | 5
+
 type CounterState = {
   current: number;
   by: ByValues;
