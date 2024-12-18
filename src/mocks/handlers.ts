@@ -1,3 +1,3 @@
 import news from './news-handler';
-
-export const handlers = [...news];
+import { features } from './features-handler';
+export const handlers = [...news, ...features];

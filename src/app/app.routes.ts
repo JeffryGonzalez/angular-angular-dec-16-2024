@@ -3,9 +3,16 @@ import { NewsComponent } from './areas/news/news.component';
 import { ReadArticleStore } from './areas/news/services/read-articles.store';
 import { NewsListComponent } from './areas/news/components/news-list.component';
 import { HistoryComponent } from './areas/news/components/history.component';
+import { canMatchFeature } from '@shared';
 
 // Modes within our application.
 export const routes: Routes = [
+  {
+    path: 'lrc',
+    canMatch: [canMatchFeature('lrc')],
+    loadChildren: () =>
+      import('./areas/lrc/lrc.routes').then((r) => r.LRC_ROUTES),
+  },
   {
     path: 'counter',
     loadChildren: () =>

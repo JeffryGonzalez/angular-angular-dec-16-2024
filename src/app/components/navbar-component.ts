@@ -1,10 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { FeatureDirective } from '@shared';
 
 @Component({
   selector: 'app-nav-bar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink],
+  imports: [RouterLink, FeatureDirective],
   template: `
     <div class="navbar bg-base-100">
       <div class="flex-1">
@@ -15,6 +16,7 @@ import { RouterLink } from '@angular/router';
           <li><a routerLink="news">News</a></li>
           <li><a routerLink="golf">Golf</a></li>
           <li><a routerLink="counter">Counter</a></li>
+          <li *feature="'lrc'"><a routerLink="lrc">Learning Resources</a></li>
         </ul>
       </div>
     </div>
