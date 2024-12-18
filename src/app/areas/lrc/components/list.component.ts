@@ -1,18 +1,12 @@
-import { JsonPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, resource } from '@angular/core';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { PostApi } from '../services/post-api';
 
 @Component({
   selector: 'app-lrc-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [JsonPipe],
-  template: `
-    <h1>List of Posts</h1>
-    <pre>{{ posts.value() | json }}</pre>
-  `,
+  imports: [JsonPipe, AsyncPipe],
+  template: ` <h1>List of Posts</h1> `,
   styles: ``,
 })
-export class ListComponent {
-  posts = resource({
-    loader: () => fetch('/api/posts').then((p) => p.json()),
-  });
-}
+export class ListComponent {}
