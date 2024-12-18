@@ -13,4 +13,6 @@ import { RouterOutlet } from '@angular/router';
   styles: [],
   imports: [NavbarComponent, RouterOutlet], // put this in the bundle of code you send to the browser.
 })
-export class AppComponent {}
+export class AppComponent {
+
+}

@@ -357,9 +357,9 @@
       "id": "lNUR6-lbOTfTe_upr83Mo",
       "type": "rectangle",
       "x": 1233.25,
-      "y": -80.25,
+      "y": 37.25,
       "width": 181,
-      "height": 576.25,
+      "height": 458.75,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#b2f2bb",
@@ -374,8 +374,8 @@
         "type": 3
       },
       "seed": 1284363901,
-      "version": 270,
-      "versionNonce": 575027741,
+      "version": 285,
+      "versionNonce": 1622958579,
       "isDeleted": false,
       "boundElements": [
         {
@@ -383,7 +383,7 @@
           "id": "s_b3nn_redCnHwyBVI3Bz"
         }
       ],
-      "updated": 1734471256988,
+      "updated": 1734471383865,
       "link": null,
       "locked": false
     },
@@ -391,7 +391,7 @@
       "id": "s_b3nn_redCnHwyBVI3Bz",
       "type": "text",
       "x": 1259.4000549316406,
-      "y": 195.375,
+      "y": 254.125,
       "width": 128.69989013671875,
       "height": 25,
       "angle": 0,
@@ -406,11 +406,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 954728157,
-      "version": 337,
-      "versionNonce": 1829957245,
+      "version": 352,
+      "versionNonce": 23178131,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1734471256988,
+      "updated": 1734471383865,
       "link": null,
       "locked": false,
       "text": "Angular Skills",
@@ -427,9 +427,9 @@
       "id": "CCuEUgMthAUv3v5xtzeN7",
       "type": "rectangle",
       "x": 1441,
-      "y": 399.75,
+      "y": -16.5,
       "width": 181,
-      "height": 96.25000000000001,
+      "height": 512.5,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#b2f2bb",
@@ -444,8 +444,8 @@
         "type": 3
       },
       "seed": 1567234547,
-      "version": 356,
-      "versionNonce": 402700627,
+      "version": 365,
+      "versionNonce": 1822187197,
       "isDeleted": false,
       "boundElements": [
         {
@@ -453,7 +453,7 @@
           "id": "KZalf9AmBBp2HAVTzlHGa"
         }
       ],
-      "updated": 1734471260206,
+      "updated": 1734471379118,
       "link": null,
       "locked": false
     },
@@ -461,7 +461,7 @@
       "id": "KZalf9AmBBp2HAVTzlHGa",
       "type": "text",
       "x": 1489.930046081543,
-      "y": 422.875,
+      "y": 214.75,
       "width": 83.13990783691406,
       "height": 50,
       "angle": 0,
@@ -476,11 +476,11 @@
       "frameId": null,
       "roundness": null,
       "seed": 867236115,
-      "version": 440,
-      "versionNonce": 820254451,
+      "version": 449,
+      "versionNonce": 511409949,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1734471260206,
+      "updated": 1734471379118,
       "link": null,
       "locked": false,
       "text": "Business\nSkills",
