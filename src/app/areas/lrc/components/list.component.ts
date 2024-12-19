@@ -1,12 +1,19 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { PostsStore } from '../services/post-store';
 import { DatePipe } from '@angular/common';
 import { RelativeTimeComponent } from '@shared';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { filter, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-lrc-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, RelativeTimeComponent],
+  imports: [DatePipe, RelativeTimeComponent, RouterLink],
   template: `
     <div class="flex  flex-col gap-4">
       @for (post of store.posts(); track post.id) {
@@ -28,7 +35,14 @@ import { RelativeTimeComponent } from '@shared';
               {{ post.description }}
             </p>
             <p>
-              <span class="font-bold">Posted By: </span> {{ post.postedBy }}
+              <span class="font-bold">Posted By: </span>
+              <a
+                class="link"
+                routerLink="."
+                [queryParams]="{ filter: post.postedBy }"
+              >
+                {{ post.postedBy }}
+              </a>
             </p>
             <p>
               {{ post.datePosted | date: 'medium' }}
@@ -43,6 +57,17 @@ import { RelativeTimeComponent } from '@shared';
   `,
   styles: ``,
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
   store = inject(PostsStore);
+
+  router = inject(Router);
+  route = inject(ActivatedRoute);
+  ngOnInit(): void {
+    this.route.queryParamMap
+      .pipe(
+        map((p) => p.get('filter')), // the value of the filter query or null
+        // filter((p) => p !== null), // stop here if it is null.
+      )
+      .subscribe((p) => this.store.setFilter(p));
+  }
 }
