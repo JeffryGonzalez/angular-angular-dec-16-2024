@@ -1,20 +1,24 @@
+import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   OnInit,
 } from '@angular/core';
-import { PostsStore } from '../services/post-store';
-import { DatePipe } from '@angular/common';
-import { RelativeTimeComponent } from '@shared';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { filter, map, tap } from 'rxjs';
+import { RelativeTimeComponent } from '@shared';
+import { map } from 'rxjs';
+import { PostsStore } from '../services/post-store';
 
 @Component({
   selector: 'app-lrc-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe, RelativeTimeComponent, RouterLink],
   template: `
+    @if (store.filter() !== null) {
+      <a class="btn btn-sm btn-accent" routerLink=".">See All Posts</a>
+    }
+
     <div class="flex  flex-col gap-4">
       @for (post of store.posts(); track post.id) {
         <div class=" card bg-base-200 shadow-xl">
