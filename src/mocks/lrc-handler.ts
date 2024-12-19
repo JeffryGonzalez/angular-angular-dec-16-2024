@@ -28,6 +28,23 @@ const fakeLinks = [
 ];
 
 export const lrcHandlers = [
+  http.post('/api/posts', async ({ request }) => {
+    await delay();
+    const body = (await request.json()) as unknown as {
+      name: string;
+      description: string;
+      link: string;
+    };
+    // const from = request.headers.get("Authorization") // blah blah blah
+    const from = 'Jeff';
+    const newPost = {
+      ...body,
+      id: crypto.randomUUID(),
+      postedBy: from,
+      datePosted: new Date().toISOString(),
+    };
+    return HttpResponse.json(newPost);
+  }),
   http.get('/api/posts', async () => {
     await delay();
     return HttpResponse.json(fakeLinks);
