@@ -2,6 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import {
   PreloadAllModules,
   provideRouter,
+  withComponentInputBinding,
   withPreloading,
   withViewTransitions,
 } from '@angular/router';
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(), // TODO: Talk about this.
     provideRouter(
       routes,
+      withComponentInputBinding(),
       withViewTransitions(),
       withPreloading(PreloadAllModules),
     ),
