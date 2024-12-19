@@ -7,10 +7,10 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import { addEntities, withEntities } from '@ngrx/signals/entities';
-import { PostApiResponseItem } from '../types';
+import { addEntities, addEntity, withEntities } from '@ngrx/signals/entities';
+import { PostApiResponseItem, PostCreateModel } from '../types';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, switchMap, tap } from 'rxjs';
+import { mergeMap, pipe, switchMap, tap } from 'rxjs';
 import { computed, inject } from '@angular/core';
 import { PostApi } from './post-api';
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
@@ -29,6 +29,17 @@ export const PostsStore = signalStore(
     const api = inject(PostApi);
     return {
       setFilter: (filter: string | null) => patchState(store, { filter }),
+      addPost: rxMethod<PostCreateModel>(
+        mergeMap((post) =>
+          api
+            .addPost(post)
+            .pipe(
+              tap((p) =>
+                patchState(store, addEntity(p, { collection: '_server' })),
+              ),
+            ),
+        ),
+      ),
       _load: rxMethod<void>(
         pipe(
           switchMap(() =>
@@ -49,6 +60,7 @@ export const PostsStore = signalStore(
   }),
   withComputed((store) => {
     return {
+      numberOfPosts: computed(() => store._serverEntities().length),
       posts: computed(() => {
         const posts = store._serverEntities();
         if (store.filter() !== null) {

@@ -29,7 +29,7 @@ const fakeLinks = [
 
 export const lrcHandlers = [
   http.post('/api/posts', async ({ request }) => {
-    await delay();
+    await delay(3000);
     const body = (await request.json()) as unknown as {
       name: string;
       description: string;

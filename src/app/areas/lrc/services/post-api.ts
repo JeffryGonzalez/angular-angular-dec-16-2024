@@ -1,5 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { PostApiResponse } from '../types';
+import {
+  PostApiResponse,
+  PostApiResponseItem,
+  PostCreateModel,
+} from '../types';
 import { inject } from '@angular/core';
 
 export class PostApi {
@@ -7,5 +11,9 @@ export class PostApi {
   #http = inject(HttpClient);
   getPosts() {
     return this.#http.get<PostApiResponse>('/api/posts');
+  }
+
+  addPost(post: PostCreateModel) {
+    return this.#http.post<PostApiResponseItem>('/api/posts', post);
   }
 }

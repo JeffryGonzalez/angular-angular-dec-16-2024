@@ -1,14 +1,17 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { PostsStore } from './services/post-store';
 
 @Component({
   selector: 'app-lrc',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet],
   template: `
-    <p>LRC Stuff Goes Here</p>
+    <p>There are {{ store.numberOfPosts() }} posts</p>
     <router-outlet />
   `,
   styles: ``,
 })
-export class LrcComponent {}
+export class LrcComponent {
+  store = inject(PostsStore);
+}
