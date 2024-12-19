@@ -1,22 +1,27 @@
-import { DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RelativeTimeComponent } from '@shared';
 import { map } from 'rxjs';
 import { PostsStore } from '../services/post-store';
-
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PostApi } from '../services/post-api';
 @Component({
   selector: 'app-lrc-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, RelativeTimeComponent, RouterLink],
+  imports: [DatePipe, RelativeTimeComponent, RouterLink, AsyncPipe],
   template: `
     @if (store.filter() !== null) {
-      <a class="btn btn-sm btn-accent" routerLink=".">See All Posts</a>
+      <a class="btn btn-sm btn-accent" routerLink="."
+        >See All Posts not just those by {{ filter$ | async }}</a
+      >
     }
 
     <div class="flex  flex-col gap-4">
@@ -61,16 +66,34 @@ import { PostsStore } from '../services/post-store';
   `,
   styles: ``,
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
   store = inject(PostsStore);
 
   router = inject(Router);
-  route = inject(ActivatedRoute);
-  ngOnInit(): void {
+  route: ActivatedRoute = inject(ActivatedRoute);
+
+  filter$ = this.route.queryParamMap.pipe(map((p) => p.get('filter')));
+  destroyRef = inject(DestroyRef);
+  constructor() {
+    // injection context
     this.route.queryParamMap
       .pipe(
         map((p) => p.get('filter')), // the value of the filter query or null
         // filter((p) => p !== null), // stop here if it is null.
+        takeUntilDestroyed(), // this
+      )
+      .subscribe((p) => this.store.setFilter(p));
+  }
+
+  doThisThing() {
+    const api = inject(PostApi);
+    // this is an example if in a weird case you want to subscribe somewhere
+    // other than in the constructor of using takeUntilDestoyed with a destroyref
+    this.route.queryParamMap
+      .pipe(
+        map((p) => p.get('filter')), // the value of the filter query or null
+        // filter((p) => p !== null), // stop here if it is null.
+        takeUntilDestroyed(this.destroyRef), // this
       )
       .subscribe((p) => this.store.setFilter(p));
   }
