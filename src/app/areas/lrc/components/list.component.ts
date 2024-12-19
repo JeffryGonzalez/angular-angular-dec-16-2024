@@ -8,19 +8,38 @@ import { RelativeTimeComponent } from '@shared';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe, RelativeTimeComponent],
   template: `
-    <h1>List of Posts</h1>
-    @for (post of store.posts(); track post.id) {
-      <div class="p-12">
-        <p>Name: {{ post.name }}</p>
-        <p>Description: {{ post.description }}</p>
-        <p>Posted By: {{ post.postedBy }}</p>
-        <p>
-          Posted On: {{ post.datePosted | date: 'medium' }}
-          <app-relative-time [date]="post.datePosted" />
-        </p>
-        <p>Link: {{ post.link }}</p>
-      </div>
-    }
+    <div class="flex  flex-col gap-4">
+      @for (post of store.posts(); track post.id) {
+        <div class=" card bg-base-200 shadow-xl">
+          <div class="card-body">
+            <p class="card-title uppercase font-black">
+              {{ post.name }}
+            </p>
+
+            <p>
+              <a
+                [href]="post.link"
+                target="_blank"
+                class="link text-blue-600"
+                >{{ post.link }}</a
+              >
+            </p>
+            <p class="text-lg  font-semibold">
+              {{ post.description }}
+            </p>
+            <p>
+              <span class="font-bold">Posted By: </span> {{ post.postedBy }}
+            </p>
+            <p>
+              {{ post.datePosted | date: 'medium' }}
+              <span class="text-sm   from-neutral-100 font-extralight">
+                (<app-relative-time [date]="post.datePosted" />)
+              </span>
+            </p>
+          </div>
+        </div>
+      }
+    </div>
   `,
   styles: ``,
 })

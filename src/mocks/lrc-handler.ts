@@ -17,6 +17,14 @@ const fakeLinks = [
     datePosted: '2024-11-13',
     postedBy: 'Carla',
   },
+  {
+    id: '3',
+    name: 'Hypertheory',
+    description: 'Training ',
+    link: 'https://www.hypertheory.com',
+    datePosted: '2023-04-10',
+    postedBy: 'Jeff',
+  },
 ];
 
 export const lrcHandlers = [
