@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   template: `
     <p>You want to see the details of post {{ id() }}</p>
-    <a class="btn btn-primary" [routerLink]="['/lrc']">Back To List</a>
+    <a class="btn btn-primary" routerLink="../../">Back To List</a>
   `,
   styles: ``,
 })
